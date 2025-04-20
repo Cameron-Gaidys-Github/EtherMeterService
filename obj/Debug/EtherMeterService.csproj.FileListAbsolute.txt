@@ -1,0 +1,32 @@
+C:\Users\madeslauriers\OneDrive - Alterra Mountain Company\Documents\mdstuff\Alterra\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe.config
+C:\Users\madeslauriers\OneDrive - Alterra Mountain Company\Documents\mdstuff\Alterra\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe
+C:\Users\madeslauriers\OneDrive - Alterra Mountain Company\Documents\mdstuff\Alterra\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.pdb
+C:\Users\madeslauriers\OneDrive - Alterra Mountain Company\Documents\mdstuff\Alterra\EtherMeterService\Service\EtherMeterService\bin\Debug\log4net.dll
+C:\Users\madeslauriers\OneDrive - Alterra Mountain Company\Documents\mdstuff\Alterra\EtherMeterService\Service\EtherMeterService\bin\Debug\log4net.pdb
+C:\Users\madeslauriers\OneDrive - Alterra Mountain Company\Documents\mdstuff\Alterra\EtherMeterService\Service\EtherMeterService\bin\Debug\log4net.xml
+C:\Users\madeslauriers\OneDrive - Alterra Mountain Company\Documents\mdstuff\Alterra\EtherMeterService\Service\EtherMeterService\obj\Debug\EtherMeterService.csproj.AssemblyReference.cache
+C:\Users\madeslauriers\OneDrive - Alterra Mountain Company\Documents\mdstuff\Alterra\EtherMeterService\Service\EtherMeterService\obj\Debug\EtherMeterService.csproj.CoreCompileInputs.cache
+C:\Users\madeslauriers\OneDrive - Alterra Mountain Company\Documents\mdstuff\Alterra\EtherMeterService\Service\EtherMeterService\obj\Debug\EtherMeterService.csproj.CopyComplete
+C:\Users\madeslauriers\OneDrive - Alterra Mountain Company\Documents\mdstuff\Alterra\EtherMeterService\Service\EtherMeterService\obj\Debug\EtherMeterService.exe
+C:\Users\madeslauriers\OneDrive - Alterra Mountain Company\Documents\mdstuff\Alterra\EtherMeterService\Service\EtherMeterService\obj\Debug\EtherMeterService.pdb
+C:\Users\madeslauriers\OneDrive - Alterra Mountain Company\Documents\mdstuff\Alterra\EtherMeterService\Service\EtherMeterService\obj\Debug\EtherMeterService.ProjectInstaller.resources
+C:\Users\madeslauriers\OneDrive - Alterra Mountain Company\Documents\mdstuff\Alterra\EtherMeterService\Service\EtherMeterService\obj\Debug\EtherMeterService.csproj.GenerateResource.cache
+C:\Users\madeslauriers\OneDrive - Alterra Mountain Company\Documents\mdstuff\Alterra\EtherMeterService\Service\EtherMeterService\bin\Debug\HtmlAgilityPack.dll
+C:\Users\madeslauriers\OneDrive - Alterra Mountain Company\Documents\mdstuff\Alterra\EtherMeterService\Service\EtherMeterService\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\madeslauriers\OneDrive - Alterra Mountain Company\Documents\mdstuff\Alterra\EtherMeterService\Service\EtherMeterService\bin\Debug\HtmlAgilityPack.xml
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe.config
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.pdb
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\HtmlAgilityPack.dll
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\log4net.dll
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\HtmlAgilityPack.xml
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\log4net.pdb
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\log4net.xml
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\obj\Debug\EtherMeterService.csproj.AssemblyReference.cache
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\obj\Debug\EtherMeterService.ProjectInstaller.resources
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\obj\Debug\EtherMeterService.csproj.GenerateResource.cache
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\obj\Debug\EtherMeterService.csproj.CoreCompileInputs.cache
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\obj\Debug\EtherMet.FF76328B.Up2Date
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\obj\Debug\EtherMeterService.exe
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\obj\Debug\EtherMeterService.pdb

@@ -1,0 +1,17 @@
+﻿
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe assembly's progress.
+The file is located at C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.InstallLog.
+
+An exception occurred during the Install phase.
+System.ComponentModel.Win32Exception: Access is denied
+
+The Rollback phase of the installation is beginning.
+See the contents of the log file for the C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe assembly's progress.
+The file is located at C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.InstallLog.
+
+The Rollback phase completed successfully.
+
+The transacted install has completed.
