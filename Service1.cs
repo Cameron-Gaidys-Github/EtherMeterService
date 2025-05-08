@@ -86,9 +86,9 @@ namespace EtherMeterService
             return currentMonth;
         }
 
-        Dictionary<string, int> GetThresholdAdjustments(int meterID)
+        Dictionary<string, float> GetThresholdAdjustments(int meterID)
         {
-            Dictionary<string, int> adjustments = new Dictionary<string, int>();
+            Dictionary<string, float> adjustments = new Dictionary<string, float>();
             string connectionString = Globals.sDBConnectString;
             string strSQL = $"SELECT * FROM EthermeterThresholdOffset WHERE MeterID = {meterID}";
 
@@ -106,21 +106,21 @@ namespace EtherMeterService
                     {
                         rdr.Read();
                         Log.Info($"Retrieved adjustment values for MeterID {meterID}:");
-                        adjustments["Christmas Week"] = rdr["Christmas Week"] != DBNull.Value ? Convert.ToInt32(rdr["Christmas Week"]) : 0;
-                        adjustments["MLK Week"] = rdr["MLK Week"] != DBNull.Value ? Convert.ToInt32(rdr["MLK Week"]) : 0;
-                        adjustments["Presidents Week"] = rdr["Presidents Week"] != DBNull.Value ? Convert.ToInt32(rdr["Presidents Week"]) : 0;
-                        adjustments["January"] = rdr["January"] != DBNull.Value ? Convert.ToInt32(rdr["January"]) : 0;
-                        adjustments["February"] = rdr["February"] != DBNull.Value ? Convert.ToInt32(rdr["February"]) : 0;
-                        adjustments["March"] = rdr["March"] != DBNull.Value ? Convert.ToInt32(rdr["March"]) : 0;
-                        adjustments["April"] = rdr["April"] != DBNull.Value ? Convert.ToInt32(rdr["April"]) : 0;
-                        adjustments["May"] = rdr["May"] != DBNull.Value ? Convert.ToInt32(rdr["May"]) : 0;
-                        adjustments["June"] = rdr["June"] != DBNull.Value ? Convert.ToInt32(rdr["June"]) : 0;
-                        adjustments["July"] = rdr["July"] != DBNull.Value ? Convert.ToInt32(rdr["July"]) : 0;
-                        adjustments["August"] = rdr["August"] != DBNull.Value ? Convert.ToInt32(rdr["August"]) : 0;
-                        adjustments["September"] = rdr["September"] != DBNull.Value ? Convert.ToInt32(rdr["September"]) : 0;
-                        adjustments["October"] = rdr["October"] != DBNull.Value ? Convert.ToInt32(rdr["October"]) : 0;
-                        adjustments["November"] = rdr["November"] != DBNull.Value ? Convert.ToInt32(rdr["November"]) : 0;
-                        adjustments["December"] = rdr["December"] != DBNull.Value ? Convert.ToInt32(rdr["December"]) : 0;
+                        adjustments["Christmas Week"] = rdr["Christmas Week"] != DBNull.Value ? Convert.ToSingle(rdr["Christmas Week"]) : 0f;
+                        adjustments["MLK Week"] = rdr["MLK Week"] != DBNull.Value ? Convert.ToSingle(rdr["MLK Week"]) : 0f;
+                        adjustments["Presidents Week"] = rdr["Presidents Week"] != DBNull.Value ? Convert.ToSingle(rdr["Presidents Week"]) : 0f;
+                        adjustments["January"] = rdr["January"] != DBNull.Value ? Convert.ToSingle(rdr["January"]) : 0f;
+                        adjustments["February"] = rdr["February"] != DBNull.Value ? Convert.ToSingle(rdr["February"]) : 0f;
+                        adjustments["March"] = rdr["March"] != DBNull.Value ? Convert.ToSingle(rdr["March"]) : 0f;
+                        adjustments["April"] = rdr["April"] != DBNull.Value ? Convert.ToSingle(rdr["April"]) : 0f;
+                        adjustments["May"] = rdr["May"] != DBNull.Value ? Convert.ToSingle(rdr["May"]) : 0f;
+                        adjustments["June"] = rdr["June"] != DBNull.Value ? Convert.ToSingle(rdr["June"]) : 0f;
+                        adjustments["July"] = rdr["July"] != DBNull.Value ? Convert.ToSingle(rdr["July"]) : 0f;
+                        adjustments["August"] = rdr["August"] != DBNull.Value ? Convert.ToSingle(rdr["August"]) : 0f;
+                        adjustments["September"] = rdr["September"] != DBNull.Value ? Convert.ToSingle(rdr["September"]) : 0f;
+                        adjustments["October"] = rdr["October"] != DBNull.Value ? Convert.ToSingle(rdr["October"]) : 0f;
+                        adjustments["November"] = rdr["November"] != DBNull.Value ? Convert.ToSingle(rdr["November"]) : 0f;
+                        adjustments["December"] = rdr["December"] != DBNull.Value ? Convert.ToSingle(rdr["December"]) : 0f;
 
                         foreach (var adjustment in adjustments)
                         {
@@ -142,10 +142,16 @@ namespace EtherMeterService
             return adjustments;
         }
 
-        bool SendAlertEmail(string emailMessage)
+        bool SendAlertEmail(int meterID, string emailMessage)
         {
             try
             {
+                // Get the meter name from the dictionary
+                string meterName = Globals.MeterNames.ContainsKey(meterID) ? Globals.MeterNames[meterID] : "Unknown Meter";
+
+                // Include the meter name in the email body
+                emailMessage = $"Alert for {meterName} (MeterID: {meterID}):\n" + emailMessage;
+
                 // Configure the SMTP client with the provided settings
                 SmtpClient mySmtpClient = new SmtpClient("smtp-relay.idirectory.itw")
                 {
@@ -157,14 +163,14 @@ namespace EtherMeterService
                 // Create the email message
                 MailMessage mail = new MailMessage
                 {
-                    From = new MailAddress("EthermeterAlerts@sugarbush.com"), // Replace with a valid sender email
+                    From = new MailAddress("EthermeterAlerts@sugarbush.com"),
                     Subject = "Alert Notification",
                     Body = emailMessage,
                     IsBodyHtml = false
                 };
 
                 // Add recipient(s)
-                mail.To.Add("CGaidys@sugarbush.com"); // Replace with the actual recipient email
+                mail.To.Add("Waterusagealerts@sugarbush.com");
 
                 // Send the email
                 mySmtpClient.Send(mail);
@@ -179,6 +185,7 @@ namespace EtherMeterService
             return true;
         }
 
+
         int GetCurrentWeekOfYear()
         {
             var culture = System.Globalization.CultureInfo.CurrentCulture;
@@ -187,272 +194,279 @@ namespace EtherMeterService
             return calendar.GetWeekOfYear(DateTime.Now, dateTimeFormat.CalendarWeekRule, dateTimeFormat.FirstDayOfWeek);
         }
 
-        bool RecordNewReadings()
+        private bool RecordNewReadings()
         {
-            string connectionString = Globals.sDBConnectString;
-            SqlConnection connection = new SqlConnection(connectionString);
-            string strSQL = "";
-            SqlCommand command;
-            SqlDataReader rdr = null;
-
-            Log.Info("Inserting the latest readings into the database.");
+            Log.Info("=== Starting Reading Insert and Threshold Analysis ===");
 
             try
             {
-                connection.Open();
-                command = new SqlCommand(strSQL, connection);
-
-                foreach (var kvp in Globals.dicMeterNetFaults)
+                using (SqlConnection connection = new SqlConnection(Globals.sDBConnectString))
                 {
-                    if (Globals.dicMeterReadings.ContainsKey(kvp.Key))
+                    connection.Open();
+
+                    foreach (var kvp in Globals.dicMeterNetFaults)
                     {
-                        Log.Info($"Inserting reading for MeterID: {kvp.Key}");
-                        command.CommandText = "insert into EtherMeterReadings(MeterID, NetworkFault, MeterFault, MeterReading, FlowRate, TimeStamp) " +
-                                              "values('" + kvp.Key + "', " + kvp.Value + ", " + Globals.dicMeterReadings[kvp.Key].Split(';')[1] + ", " +
-                                              Globals.dicMeterReadings[kvp.Key].Split(';')[0] + ", 0, '" + DateTime.Now.ToString() + "')";
-                        command.ExecuteNonQuery();
-                    }
-                }
+                        if (!Globals.dicMeterReadings.TryGetValue(kvp.Key, out var readingData))
+                            continue;
 
-                Log.Info("Analyzing thresholds for breaches.");
-                string strCurrentHour = "Hour" + (DateTime.Now.Hour == 0 ? 24 : DateTime.Now.Hour);
+                        var readingParts = readingData.Split(';');
+                        int meterReading = int.Parse(readingParts[0]);
+                        int meterFault = int.Parse(readingParts[1]);
+                        int networkFault = int.Parse(kvp.Value);
 
-                foreach (var kvp in Globals.dicMeterNetFaults)
-                {
-                    if (Globals.dicMeterReadings.ContainsKey(kvp.Key))
-                    {
-                        Log.Info($"Checking threshold for MeterID: {kvp.Key}");
-
-                        strSQL = "SELECT TOP 1 MeterReading FROM EtherMeterReadings " +
-                                 "WHERE MeterID = '" + kvp.Key + "' AND TimeStamp < '" + DateTime.Now.ToString("yyyy-MM-dd HH:00:00") + "' " +
-                                 "ORDER BY TimeStamp DESC";
-                        command.CommandText = strSQL;
-                        rdr = command.ExecuteReader();
-
-                        int previousReading = 0;
-                        if (rdr.HasRows)
+                        using (SqlCommand insertCommand = new SqlCommand(
+                            "INSERT INTO EtherMeterReadings (MeterID, NetworkFault, MeterFault, MeterReading, FlowRate, TimeStamp) " +
+                            "VALUES (@MeterID, @NetworkFault, @MeterFault, @MeterReading, @FlowRate, @TimeStamp)", connection))
                         {
-                            rdr.Read();
-                            previousReading = Convert.ToInt32(rdr["MeterReading"]);
-                            Log.Info($"Previous reading for MeterID {kvp.Key}: {previousReading}");
+                            insertCommand.Parameters.AddWithValue("@MeterID", kvp.Key);
+                            insertCommand.Parameters.AddWithValue("@NetworkFault", networkFault);
+                            insertCommand.Parameters.AddWithValue("@MeterFault", meterFault);
+                            insertCommand.Parameters.AddWithValue("@MeterReading", meterReading);
+                            insertCommand.Parameters.AddWithValue("@FlowRate", 0);
+                            insertCommand.Parameters.AddWithValue("@TimeStamp", DateTime.Now);
+
+                            insertCommand.ExecuteNonQuery();
                         }
 
-                        rdr.Close();
+                        Log.Info($"    ✓ Inserted reading for MeterID {kvp.Key}: Reading={meterReading}, Fault={meterFault}, NetFault={networkFault}");
+                    }
 
-                        int currentReading = Convert.ToInt32(Globals.dicMeterReadings[kvp.Key].Split(';')[0]);
-                        int usageDifference = currentReading - previousReading;
-                        Log.Info($"Current reading for MeterID {kvp.Key}: {currentReading}, Usage difference: {usageDifference}");
+                    Log.Info("=== Starting Threshold Evaluation ===");
 
-                        strSQL = $"SELECT {strCurrentHour} FROM EtherMeterThresholds WHERE MeterID = '{kvp.Key}'";
-                        command.CommandText = strSQL;
-                        rdr = command.ExecuteReader();
+                    string strCurrentHour = "Hour" + (DateTime.Now.Hour == 0 ? 24 : DateTime.Now.Hour);
 
-                        if (rdr.HasRows)
+                    foreach (var kvp in Globals.dicMeterNetFaults)
+                    {
+                        if (!Globals.dicMeterReadings.TryGetValue(kvp.Key, out var readingData))
+                            continue;
+
+                        var readingParts = readingData.Split(';');
+                        int currentReading = int.Parse(readingParts[0]);
+                        int previousReading = 0;
+
+                        using (SqlCommand previousCommand = new SqlCommand(
+                            "SELECT TOP 1 MeterReading FROM EtherMeterReadings WHERE MeterID = @MeterID AND TimeStamp < @CurrentHour ORDER BY TimeStamp DESC", connection))
                         {
-                            rdr.Read();
-                            string thresholdValue = rdr[strCurrentHour].ToString();
-                            rdr.Close();
+                            previousCommand.Parameters.AddWithValue("@MeterID", kvp.Key);
+                            previousCommand.Parameters.AddWithValue("@CurrentHour", DateTime.Now.ToString("yyyy-MM-dd HH:00:00"));
 
-                            if (thresholdValue != "NO THRESHOLD" && int.TryParse(thresholdValue, out int threshold))
+                            using (SqlDataReader reader = previousCommand.ExecuteReader())
                             {
-                                Log.Info($"Base threshold for MeterID {kvp.Key}, Hour {strCurrentHour}: {threshold}");
-
-                                Dictionary<string, int> adjustments = GetThresholdAdjustments(int.Parse(kvp.Key));
-                                string adjustmentKey = GetCurrentAdjustmentKey();
-
-                                if (adjustments.ContainsKey(adjustmentKey))
+                                if (reader.Read() && !reader.IsDBNull(0))
                                 {
-                                    int adjustment = adjustments[adjustmentKey];
-                                    threshold += adjustment;
-                                    Log.Info($"Adjusted threshold for MeterID {kvp.Key}, Key {adjustmentKey}: {threshold} (Adjustment: {adjustment})");
-                                }
-
-                                if (usageDifference > threshold)
-                                {
-                                    Log.Warn($"Threshold breach detected for MeterID {kvp.Key}. Usage: {usageDifference}, Threshold: {threshold}");
-
-                                    // Send email alert
-                                    string emailMessage = $"Threshold breach detected for MeterID {kvp.Key}.\n" +
-                                                          $"Usage: {usageDifference}\n" +
-                                                          $"Threshold: {threshold}\n" +
-                                                          $"Time: {DateTime.Now}";
-                                    SendAlertEmail(emailMessage);
-                                }
-                                else
-                                {
-                                    Log.Info($"No threshold breach for MeterID {kvp.Key}. Usage: {usageDifference}, Threshold: {threshold}");
+                                    previousReading = Convert.ToInt32(reader.GetValue(0));
                                 }
                             }
+                        }
+
+                        int usageDifference = currentReading - previousReading;
+
+                        int threshold = 0;
+                        using (SqlCommand thresholdCommand = new SqlCommand(
+                            $"SELECT {strCurrentHour} FROM EtherMeterThresholds WHERE MeterID = @MeterID", connection))
+                        {
+                            thresholdCommand.Parameters.AddWithValue("@MeterID", kvp.Key);
+
+                            using (SqlDataReader reader = thresholdCommand.ExecuteReader())
+                            {
+                                if (reader.Read() && int.TryParse(reader[0]?.ToString(), out threshold)) { }
+                            }
+                        }
+
+                        if (threshold > 0)
+                        {
+                            Dictionary<string, float> adjustments = GetThresholdAdjustments(int.Parse(kvp.Key));
+                            string adjustmentKey = GetCurrentAdjustmentKey();
+                            if (adjustments.TryGetValue(adjustmentKey, out float adjustment))
+                            {
+                                threshold = (int)(threshold * adjustment);
+                            }
+
+                            float overagePercentage = (float)usageDifference / threshold;
+
+                            Log.Info($"    MeterID {kvp.Key} - Threshold Report:");
+                            Log.Info($"        Current Reading: {currentReading}");
+                            Log.Info($"        Previous Reading: {previousReading}");
+                            Log.Info($"        Usage Difference: {usageDifference}");
+                            Log.Info($"        Adjusted Threshold ({adjustmentKey}): {threshold}");
+                            Log.Info($"        Usage % of Threshold: {overagePercentage:P1}");
+
+                            bool initialSent = Globals.dicInitialAlertSent.TryGetValue(kvp.Key, out bool initial) && initial;
+                            bool secondarySent = Globals.dicSecondaryAlertSent.TryGetValue(kvp.Key, out bool secondary) && secondary;
+
+                            if (int.TryParse(kvp.Key, out int meterID))
+                            {
+                                // Get the meter name from the dictionary
+                                string meterName = Globals.MeterNames.ContainsKey(meterID) ? Globals.MeterNames[meterID] : "Unknown Meter";
+
+                                if (overagePercentage > 1.0f && !initialSent)
+                                {
+                                    Log.Warn($"        ⚠️ Initial Threshold Breach Detected!");
+                                    SendAlertEmail(meterID, $"⚠️ Initial threshold breach detected for {meterName} (MeterID {meterID}).\nUsage: {usageDifference}\nThreshold: {threshold}\nTime: {DateTime.Now}");
+                                    Globals.dicInitialAlertSent[kvp.Key] = true;
+                                }
+
+                                if (overagePercentage > 1.10f && !secondarySent)
+                                {
+                                    Log.Warn($"        🚨 Secondary Threshold Breach Detected (110% Over)!");
+                                    SendAlertEmail(meterID, $"🚨 Secondary alert: usage for {meterName} (MeterID {meterID}) exceeded 110% of the Threshold Limit.\nUsage: {usageDifference}\nThreshold: {threshold}\nTime: {DateTime.Now}");
+                                    Globals.dicSecondaryAlertSent[kvp.Key] = true;
+                                }
+                            }
+                            else
+                            {
+                                Log.Error($"Failed to parse MeterID from {kvp.Key}. Skipping alert.");
+                            }
+
                         }
                         else
                         {
-                            Log.Info($"No threshold found for MeterID {kvp.Key} for {strCurrentHour}.");
+                            Log.Info($"    MeterID {kvp.Key} - No valid threshold found for current hour.");
                         }
-                        rdr.Close();
                     }
                 }
-
-                command.Dispose();
-                connection.Close();
             }
             catch (Exception ex)
             {
-                Log.Error("Error inserting readings into the database. " + ex);
-            }
-            finally
-            {
-                if (connection != null)
-                {
-                    connection.Close();
-                }
-            }
-
-            Globals.dicMeterIPs.Clear();
-            Globals.dicMeterNetFaults.Clear();
-            Globals.dicMeterReadings.Clear();
-
-            return true;
-        }
-
-        bool GetReadings()
-        {
-            Log.Info("Iterate through the list of meters and get the readings from each one.");
-
-            string strPageString, strReading = "", strNetfault = "", strMeterFault = "";
-
-            bool bReadingFound = false;
-            bool bReadingTaken = false;
-            bool bFaultFound = false;
-            bool bFaultTaken = false;
-            bool bMeterDone = false;
-
-            HtmlDocument doc = new HtmlDocument();
-
-            using (WebClient client = new WebClient())
-            {
-                foreach (var kvp in Globals.dicMeterIPs)
-                {
-                    Globals.dicMeterNetFaults.Add(kvp.Key, "0");
-                    try
-                    {
-                        strPageString = client.DownloadString("http://" + kvp.Value);
-                        doc.LoadHtml(strPageString);
-                        foreach (HtmlNode table in doc.DocumentNode.SelectNodes("//table"))
-                        {
-                            foreach (HtmlNode row in table.SelectNodes("tr"))
-                            {
-                                if (bMeterDone == true)
-                                {
-                                    Log.Info($"Finished reading MeterID: {kvp.Key}. Reading: {strReading}, Fault: {strMeterFault}");
-                                    strMeterFault = strMeterFault.Trim() == "NO" ? "0" : "1";
-                                    Globals.dicMeterReadings.Add(kvp.Key, $"{strReading};{strMeterFault}");
-                                    bMeterDone = false;
-                                    bReadingTaken = false;
-                                    bReadingFound = false;
-                                    bFaultFound = false;
-                                    bFaultTaken = false;
-                                    break;
-                                }
-
-                                foreach (HtmlNode cell in row.SelectNodes("td"))
-                                {
-                                    if (cell.InnerText == "Meter 1 Total")
-                                    {
-                                        bReadingFound = true;
-                                    }
-                                    else if (bReadingFound)
-                                    {
-                                        strReading = cell.InnerText;
-                                        bReadingTaken = true;
-                                        bReadingFound = false;
-                                    }
-
-                                    if (cell.InnerText == "Meter 1 Fault")
-                                    {
-                                        bFaultFound = true;
-                                    }
-                                    else if (bFaultFound)
-                                    {
-                                        strMeterFault = cell.InnerText;
-                                        bFaultTaken = true;
-                                        bMeterDone = true;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.Error($"Error getting data from MeterID: {kvp.Key}, IP: {kvp.Value}. Exception: {ex}");
-                        Globals.dicMeterNetFaults[kvp.Key] = "1";
-                    }
-                }
-            }
-
-            Log.Info("Finished iterating through the list of meters.");
-            // Call RecordNewReadings after readings are retrieved
-            if (RecordNewReadings() == false)
-            {
-                Log.Error("RecordNewReadings failed.");
-            }
-            return true;
-        }
-
-        bool GetReadingsFromMeters()
-        {
-            Log.Info("Retrieving list of active meter profiles from the database.");
-
-            string connectionString = Globals.sDBConnectString;
-            SqlConnection connection = new SqlConnection(connectionString);
-            string strSQL = "select * from EtherMeterProfiles where IsActive = 1 order by MeterID asc";
-            SqlCommand command;
-            SqlDataReader rdr = null;
-
-            try
-            {
-                connection.Open();
-                command = new SqlCommand(strSQL, connection);
-                rdr = command.ExecuteReader();
-
-                if (rdr.HasRows)
-                {
-                    while (rdr.Read())
-                    {
-                        string meterID = rdr["MeterID"].ToString();
-                        string ipAddress = rdr["IPAddress"].ToString();
-                        Globals.dicMeterIPs.Add(meterID, ipAddress);
-                        Log.Info($"Retrieved MeterID: {meterID}, IP: {ipAddress}");
-                    }
-                }
-                else
-                {
-                    Log.Info("No active meter profiles found in the database.");
-                }
-                rdr.Close();
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Error retrieving meter profiles from the database. " + ex);
+                Log.Error("❌ Error inserting readings or evaluating thresholds.", ex);
                 return false;
             }
             finally
             {
-                if (rdr != null)
-                {
-                    rdr.Close();
-                }
-                if (connection != null)
-                {
-                    connection.Close();
-                }
+                Globals.dicMeterIPs.Clear();
+                Globals.dicMeterNetFaults.Clear();
+                Globals.dicMeterReadings.Clear();
             }
 
-            Log.Info("Finished retrieving meter profiles.");
-            GetReadings();
+            Log.Info("=== Reading Insert and Threshold Analysis Complete ===\n");
 
             return true;
         }
+
+
+        private bool GetReadings()
+        {
+            Log.Info("=== Starting Meter Readings Collection ===");
+
+            HtmlDocument doc = new HtmlDocument();
+            using (WebClient client = new WebClient())
+            {
+                foreach (var kvp in Globals.dicMeterIPs)
+                {
+                    string meterID = kvp.Key;
+                    string ipAddress = kvp.Value;
+                    Globals.dicMeterNetFaults[meterID] = "0";
+
+                    try
+                    {
+                        Log.Info($"    Fetching data from MeterID {meterID} at IP {ipAddress}...");
+
+                        string strPageString = client.DownloadString($"http://{ipAddress}");
+                        doc.LoadHtml(strPageString);
+
+                        string reading = "", meterFault = "";
+                        bool readingFound = false, faultFound = false;
+
+                        foreach (HtmlNode table in doc.DocumentNode.SelectNodes("//table") ?? Enumerable.Empty<HtmlNode>())
+                        {
+                            foreach (HtmlNode row in table.SelectNodes("tr") ?? Enumerable.Empty<HtmlNode>())
+                            {
+                                foreach (HtmlNode cell in row.SelectNodes("td") ?? Enumerable.Empty<HtmlNode>())
+                                {
+                                    if (cell.InnerText == "Meter 1 Total")
+                                    {
+                                        readingFound = true;
+                                    }
+                                    else if (readingFound)
+                                    {
+                                        reading = cell.InnerText.Trim();
+                                        readingFound = false;
+                                    }
+
+                                    if (cell.InnerText == "Meter 1 Fault")
+                                    {
+                                        faultFound = true;
+                                    }
+                                    else if (faultFound)
+                                    {
+                                        meterFault = cell.InnerText.Trim() == "NO" ? "0" : "1";
+                                        faultFound = false;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(reading))
+                        {
+                            Globals.dicMeterReadings[meterID] = $"{reading};{meterFault}";
+                            Log.Info($"        ✓ Reading: {reading}, Fault: {meterFault}");
+                        }
+                        else
+                        {
+                            Log.Warn($"        ⚠️ No reading found for MeterID {meterID}.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error($"❌ Error fetching data from MeterID {meterID} (IP {ipAddress}).", ex);
+                        Globals.dicMeterNetFaults[meterID] = "1";
+                    }
+                }
+            }
+
+            Log.Info("=== Meter Readings Collection Complete ===\n");
+
+            return RecordNewReadings();
+        }
+
+
+        private bool GetReadingsFromMeters()
+        {
+            Log.Info("=== Starting Meter Profile Retrieval ===");
+
+            string connectionString = Globals.sDBConnectString;
+            string strSQL = "SELECT * FROM EtherMeterProfiles WHERE IsActive = 1 ORDER BY MeterID ASC";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand(strSQL, connection))
+            {
+                SqlDataReader rdr = null;
+                try
+                {
+                    connection.Open();
+                    rdr = command.ExecuteReader();
+
+                    if (rdr.HasRows)
+                    {
+                        while (rdr.Read())
+                        {
+                            string meterID = rdr["MeterID"].ToString();
+                            string ipAddress = rdr["IPAddress"].ToString();
+                            Globals.dicMeterIPs[meterID] = ipAddress;
+                            Log.Info($"    Retrieved MeterID {meterID} | IP {ipAddress}");
+                        }
+                    }
+                    else
+                    {
+                        Log.Warn("⚠️ No active meter profiles found.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("❌ Database error while retrieving meter profiles.", ex);
+                    return false;
+                }
+                finally
+                {
+                    rdr?.Close();
+                }
+            }
+
+            Log.Info("=== Meter Profile Retrieval Complete ===\n");
+
+            return GetReadings();
+        }
+
 
         protected override void OnStart(string[] args)
         {
@@ -475,6 +489,19 @@ namespace EtherMeterService
             public static Dictionary<string, string> dicMeterReadings = new Dictionary<string, string> { };
             public static Dictionary<string, string> dicMeterIPs = new Dictionary<string, string> { };
             public static Dictionary<string, string> dicMeterNetFaults = new Dictionary<string, string> { };
+            public static Dictionary<string, bool> dicInitialAlertSent = new Dictionary<string, bool>();
+            public static Dictionary<string, bool> dicSecondaryAlertSent = new Dictionary<string, bool>();
+
+            public static Dictionary<int, string> MeterNames = new Dictionary<int, string>()
+            {
+                { 1, "Farmhouse" },
+                { 2, "ValleyHouse" },
+                { 3, "GateHouse" },
+                { 4, "SchoolHouse" },
+                { 5, "ClayBrook" }
+            };
+
+
         }
     }
 }

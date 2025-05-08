@@ -141,3 +141,65 @@ Affected parameters are:
    logtoconsole = 
    logfile = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.InstallLog
    assemblypath = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe
+Installing assembly 'C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.InstallLog
+   assemblypath = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe
+Rolling back assembly 'C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.InstallLog
+   assemblypath = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe
+Installing assembly 'C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.InstallLog
+   assemblypath = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe
+Installing service EtherMeterService...
+Creating EventLog source EtherMeterService in log Application...
+Rolling back assembly 'C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.InstallLog
+   assemblypath = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe
+Restoring event log to previous state for source EtherMeterService.
+Installing assembly 'C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.InstallLog
+   assemblypath = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe
+Installing service EtherMeterService...
+Creating EventLog source EtherMeterService in log Application...
+Rolling back assembly 'C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.InstallLog
+   assemblypath = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe
+Restoring event log to previous state for source EtherMeterService.
+Installing assembly 'C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.InstallLog
+   assemblypath = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe
+Installing service EtherMeterService...
+Creating EventLog source EtherMeterService in log Application...
+Rolling back assembly 'C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.InstallLog
+   assemblypath = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe
+Restoring event log to previous state for source EtherMeterService.
+Installing assembly 'C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.InstallLog
+   assemblypath = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe
+Installing service EtherMeterService...
+Service EtherMeterService has been successfully installed.
+Creating EventLog source EtherMeterService in log Application...
+Committing assembly 'C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.InstallLog
+   assemblypath = C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Debug\EtherMeterService.exe
