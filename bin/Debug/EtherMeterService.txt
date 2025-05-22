@@ -5500,3 +5500,793 @@ System.InvalidCastException: Specified cast is not valid.
 
 2025-05-08 14:57:35 [10] INFO EtherMeterService.Service1 - *********************************************************
 2025-05-08 14:57:35 [10] INFO EtherMeterService.Service1 - The Sugarbush EtherMeter Reader Service has stopped.
+2025-05-22 11:34:35 [6] INFO EtherMeterService.Service1 - *********************************************************
+2025-05-22 11:34:35 [6] INFO EtherMeterService.Service1 - The Sugarbush EtherMeter Reader Service has started.
+2025-05-22 11:34:43 [7] INFO EtherMeterService.Service1 - *********************************************************
+2025-05-22 11:34:43 [7] INFO EtherMeterService.Service1 - The Sugarbush EtherMeter Reader Service has stopped.
+2025-05-22 11:34:55 [6] INFO EtherMeterService.Service1 - *********************************************************
+2025-05-22 11:34:55 [6] INFO EtherMeterService.Service1 - The Sugarbush EtherMeter Reader Service has started.
+2025-05-22 11:35:55 [7] INFO EtherMeterService.Service1 - The service has just started. Grab a set of readings from the meters.
+2025-05-22 11:35:55 [7] INFO EtherMeterService.Service1 - === Starting Meter Profile Retrieval ===
+2025-05-22 11:35:55 [7] INFO EtherMeterService.Service1 -     Retrieved MeterID 1 | IP 10.90.22.21
+2025-05-22 11:35:55 [7] INFO EtherMeterService.Service1 -     Retrieved MeterID 2 | IP 10.90.22.24
+2025-05-22 11:35:55 [7] INFO EtherMeterService.Service1 -     Retrieved MeterID 3 | IP 10.90.22.22
+2025-05-22 11:35:55 [7] INFO EtherMeterService.Service1 -     Retrieved MeterID 4 | IP 10.90.22.23
+2025-05-22 11:35:55 [7] INFO EtherMeterService.Service1 -     Retrieved MeterID 5 | IP 10.90.22.196
+2025-05-22 11:35:55 [7] INFO EtherMeterService.Service1 - === Meter Profile Retrieval Complete ===
+
+2025-05-22 11:35:55 [7] INFO EtherMeterService.Service1 - === Starting Meter Readings Collection ===
+2025-05-22 11:35:55 [7] INFO EtherMeterService.Service1 -     Fetching data from MeterID 1 at IP 10.90.22.21...
+2025-05-22 11:35:56 [7] INFO EtherMeterService.Service1 -         ? Reading: 01543802, Fault: 0
+2025-05-22 11:35:56 [7] INFO EtherMeterService.Service1 -     Fetching data from MeterID 2 at IP 10.90.22.24...
+2025-05-22 11:35:56 [7] INFO EtherMeterService.Service1 -         ? Reading: 01115662, Fault: 0
+2025-05-22 11:35:56 [7] INFO EtherMeterService.Service1 -     Fetching data from MeterID 3 at IP 10.90.22.22...
+2025-05-22 11:35:56 [7] INFO EtherMeterService.Service1 -         ? Reading: 07568696, Fault: 0
+2025-05-22 11:35:56 [7] INFO EtherMeterService.Service1 -     Fetching data from MeterID 4 at IP 10.90.22.23...
+2025-05-22 11:35:56 [7] INFO EtherMeterService.Service1 -         ? Reading: 00593109, Fault: 0
+2025-05-22 11:35:56 [7] INFO EtherMeterService.Service1 -     Fetching data from MeterID 5 at IP 10.90.22.196...
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -         ? Reading: 14341749, Fault: 0
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 - === Meter Readings Collection Complete ===
+
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 - === Starting Reading Insert and Threshold Analysis ===
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 1: Low=1543802, High=0, FlowRate=4
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 2: Low=1115662, High=0, FlowRate=4
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 3: Low=7568696, High=0, FlowRate=60
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 4: Low=593109, High=0, FlowRate=0
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 5: Low=14341749, High=0, FlowRate=742
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 - === Starting Threshold Evaluation ===
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 1
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 1:
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   Christmas Week: 1.25
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   MLK Week: 1.25
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   Presidents Week: 1.25
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   February: 1.22
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   March: 0.82
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   April: 0.45
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   May: 0.4
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   June: 0.4
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   July: 0.4
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   August: 0.4
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   September: 0.4
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   October: 0.4
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   November: 0.45
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   December: 0.75
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -     MeterID 1 - Threshold Report:
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -         Usage: 4, Threshold: 160 (May), %: 2.5%
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 2
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 2:
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   Christmas Week: 1.25
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   MLK Week: 1.25
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   Presidents Week: 1.25
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   February: 1.13
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   March: 0.73
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   April: 0.45
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   May: 0.4
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   June: 0.4
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   July: 0.4
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   August: 0.4
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   September: 0.4
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   October: 0.4
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   November: 0.45
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   December: 0.7
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -     MeterID 2 - Threshold Report:
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -         Usage: 4, Threshold: 80 (May), %: 5.0%
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 3
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 3:
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   Christmas Week: 1.25
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   MLK Week: 1.25
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   Presidents Week: 1.25
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   February: 1.21
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   March: 0.92
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   April: 0.5
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   May: 0.45
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   June: 0.45
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   July: 0.45
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   August: 0.45
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   September: 0.45
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   October: 0.45
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   November: 0.55
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   December: 0.79
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -     MeterID 3 - Threshold Report:
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -         Usage: 60, Threshold: 472 (May), %: 12.7%
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 4
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 4:
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   Christmas Week: 1.4
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   MLK Week: 1.4
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   Presidents Week: 1.4
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   February: 1.35
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   March: 0.93
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   April: 0.55
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   May: 0.5
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   June: 0.5
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   July: 0.6
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   August: 0.55
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   September: 0.45
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   October: 0.45
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   November: 0.5
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   December: 0.93
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -     MeterID 4 - Threshold Report:
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -         Usage: 0, Threshold: 60 (May), %: 0.0%
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 5
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 5:
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   Christmas Week: 1.25
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   MLK Week: 1.25
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   Presidents Week: 1.25
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   February: 1.2
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   March: 0.88
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   April: 0.75
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   May: 0.75
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   June: 0.8
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   July: 0.8
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   August: 0.8
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   September: 0.8
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   October: 0.85
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   November: 0.8
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -   December: 0.95
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -     MeterID 5 - Threshold Report:
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 -         Usage: 742, Threshold: 4500 (May), %: 16.5%
+2025-05-22 11:35:57 [7] INFO EtherMeterService.Service1 - === Reading Insert and Threshold Analysis Complete ===
+
+2025-05-22 11:53:52 [42] INFO EtherMeterService.Service1 - *********************************************************
+2025-05-22 11:53:52 [42] INFO EtherMeterService.Service1 - The Sugarbush EtherMeter Reader Service has stopped.
+2025-05-22 11:54:33 [6] INFO EtherMeterService.Service1 - *********************************************************
+2025-05-22 11:54:33 [6] INFO EtherMeterService.Service1 - The Sugarbush EtherMeter Reader Service has started.
+2025-05-22 11:55:33 [7] INFO EtherMeterService.Service1 - The service has just started. Grab a set of readings from the meters.
+2025-05-22 11:55:33 [7] INFO EtherMeterService.Service1 - === Starting Meter Profile Retrieval ===
+2025-05-22 11:55:34 [7] INFO EtherMeterService.Service1 -     Retrieved MeterID 1 | IP 10.90.22.21
+2025-05-22 11:55:34 [7] INFO EtherMeterService.Service1 -     Retrieved MeterID 2 | IP 10.90.22.24
+2025-05-22 11:55:34 [7] INFO EtherMeterService.Service1 -     Retrieved MeterID 3 | IP 10.90.22.22
+2025-05-22 11:55:34 [7] INFO EtherMeterService.Service1 -     Retrieved MeterID 4 | IP 10.90.22.23
+2025-05-22 11:55:34 [7] INFO EtherMeterService.Service1 -     Retrieved MeterID 5 | IP 10.90.22.196
+2025-05-22 11:55:34 [7] INFO EtherMeterService.Service1 - === Meter Profile Retrieval Complete ===
+
+2025-05-22 11:55:34 [7] INFO EtherMeterService.Service1 - === Starting Meter Readings Collection ===
+2025-05-22 11:55:34 [7] INFO EtherMeterService.Service1 -     Fetching data from MeterID 1 at IP 10.90.22.21...
+2025-05-22 11:55:34 [7] INFO EtherMeterService.Service1 -         ? Reading for MeterID 1: Low=01543802, High=0, Faults L:0 H:0
+2025-05-22 11:55:34 [7] INFO EtherMeterService.Service1 -     Fetching data from MeterID 2 at IP 10.90.22.24...
+2025-05-22 11:55:34 [7] INFO EtherMeterService.Service1 -         ? Reading for MeterID 2: Low=01115662, High=0, Faults L:0 H:0
+2025-05-22 11:55:34 [7] INFO EtherMeterService.Service1 -     Fetching data from MeterID 3 at IP 10.90.22.22...
+2025-05-22 11:55:34 [7] INFO EtherMeterService.Service1 -         ? Reading for MeterID 3: Low=07568747, High=0, Faults L:0 H:0
+2025-05-22 11:55:34 [7] INFO EtherMeterService.Service1 -     Fetching data from MeterID 4 at IP 10.90.22.23...
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -         ? Reading for MeterID 4: Low=00593109, High=0, Faults L:0 H:0
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -     Fetching data from MeterID 5 at IP 10.90.22.196...
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: ''
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'FlowMeters'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Refresh'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 1 Total'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '14342012'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 1 Flow'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '+54.934'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 1 Rollovers'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '0'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 1 Fault'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'NO'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 2 Total'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '00341950'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 2 Flow'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '+0.000'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 2 Rollovers'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '0'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 2 Fault'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'NO'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Analog Input 1 (%)'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '+0.00'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Analog Input 2 (%)'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '+0.00'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Power Supply (V)'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '+24.4'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Aux Digital I/O 1 (Input)'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'OFF'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Aux Digital I/O 2 (Input)'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'OFF'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Aux Digital I/O 3 (Dup)'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'OFF'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Device Uptime (min)'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '6916'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Web Hits'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '125'
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -         ? Reading for MeterID 5: Low=14342012, High=00341950, Faults L:0 H:0
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - === Meter Readings Collection Complete ===
+
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - === Starting Reading Insert and Threshold Analysis ===
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 1: Low=1543802, High=0, FlowRate=4
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 2: Low=1115662, High=0, FlowRate=4
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 3: Low=7568747, High=0, FlowRate=111
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 4: Low=593109, High=0, FlowRate=0
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 5: Low=14342012, High=341950, FlowRate=342955
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - === Starting Threshold Evaluation ===
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 1
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 1:
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   Christmas Week: 1.25
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   MLK Week: 1.25
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   Presidents Week: 1.25
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   February: 1.22
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   March: 0.82
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   April: 0.45
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   May: 0.4
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   June: 0.4
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   July: 0.4
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   August: 0.4
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   September: 0.4
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   October: 0.4
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   November: 0.45
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   December: 0.75
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -     MeterID 1 - Threshold Report:
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -         Usage: 4, Threshold: 160 (May), %: 2.5%
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 2
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 2:
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   Christmas Week: 1.25
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   MLK Week: 1.25
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   Presidents Week: 1.25
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   February: 1.13
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   March: 0.73
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   April: 0.45
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   May: 0.4
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   June: 0.4
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   July: 0.4
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   August: 0.4
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   September: 0.4
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   October: 0.4
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   November: 0.45
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -   December: 0.7
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -     MeterID 2 - Threshold Report:
+2025-05-22 11:55:35 [7] INFO EtherMeterService.Service1 -         Usage: 4, Threshold: 80 (May), %: 5.0%
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 3
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 3:
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   Christmas Week: 1.25
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   MLK Week: 1.25
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   Presidents Week: 1.25
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   February: 1.21
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   March: 0.92
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   April: 0.5
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   May: 0.45
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   June: 0.45
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   July: 0.45
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   August: 0.45
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   September: 0.45
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   October: 0.45
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   November: 0.55
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   December: 0.79
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -     MeterID 3 - Threshold Report:
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -         Usage: 111, Threshold: 472 (May), %: 23.5%
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 4
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 4:
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   Christmas Week: 1.4
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   MLK Week: 1.4
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   Presidents Week: 1.4
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   February: 1.35
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   March: 0.93
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   April: 0.55
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   May: 0.5
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   June: 0.5
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   July: 0.6
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   August: 0.55
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   September: 0.45
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   October: 0.45
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   November: 0.5
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   December: 0.93
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -     MeterID 4 - Threshold Report:
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -         Usage: 0, Threshold: 60 (May), %: 0.0%
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 5
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 5:
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   Christmas Week: 1.25
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   MLK Week: 1.25
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   Presidents Week: 1.25
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   February: 1.2
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   March: 0.88
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   April: 0.75
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   May: 0.75
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   June: 0.8
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   July: 0.8
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   August: 0.8
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   September: 0.8
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   October: 0.85
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   November: 0.8
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -   December: 0.95
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -     MeterID 5 - Threshold Report:
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 -         Usage: 342955, Threshold: 4500 (May), %: 7,621.2%
+2025-05-22 11:55:36 [7] WARN EtherMeterService.Service1 -         ?? Initial Threshold Breach Detected!
+2025-05-22 11:55:36 [7] INFO EtherMeterService.Service1 - Alert email sent successfully.
+2025-05-22 11:55:36 [7] WARN EtherMeterService.Service1 -         ?? Secondary Threshold Breach Detected!
+2025-05-22 11:55:37 [7] INFO EtherMeterService.Service1 - Alert email sent successfully.
+2025-05-22 11:55:37 [7] INFO EtherMeterService.Service1 - === Reading Insert and Threshold Analysis Complete ===
+
+2025-05-22 12:00:37 [15] INFO EtherMeterService.Service1 - It's time to get readings from the meters.
+2025-05-22 12:00:37 [15] INFO EtherMeterService.Service1 - === Starting Meter Profile Retrieval ===
+2025-05-22 12:00:37 [15] INFO EtherMeterService.Service1 -     Retrieved MeterID 1 | IP 10.90.22.21
+2025-05-22 12:00:37 [15] INFO EtherMeterService.Service1 -     Retrieved MeterID 2 | IP 10.90.22.24
+2025-05-22 12:00:37 [15] INFO EtherMeterService.Service1 -     Retrieved MeterID 3 | IP 10.90.22.22
+2025-05-22 12:00:37 [15] INFO EtherMeterService.Service1 -     Retrieved MeterID 4 | IP 10.90.22.23
+2025-05-22 12:00:37 [15] INFO EtherMeterService.Service1 -     Retrieved MeterID 5 | IP 10.90.22.196
+2025-05-22 12:00:37 [15] INFO EtherMeterService.Service1 - === Meter Profile Retrieval Complete ===
+
+2025-05-22 12:00:37 [15] INFO EtherMeterService.Service1 - === Starting Meter Readings Collection ===
+2025-05-22 12:00:37 [15] INFO EtherMeterService.Service1 -     Fetching data from MeterID 1 at IP 10.90.22.21...
+2025-05-22 12:00:37 [15] INFO EtherMeterService.Service1 -         ? Reading for MeterID 1: Low=01543802, High=0, Faults L:0 H:0
+2025-05-22 12:00:37 [15] INFO EtherMeterService.Service1 -     Fetching data from MeterID 2 at IP 10.90.22.24...
+2025-05-22 12:00:37 [15] INFO EtherMeterService.Service1 -         ? Reading for MeterID 2: Low=01115662, High=0, Faults L:0 H:0
+2025-05-22 12:00:37 [15] INFO EtherMeterService.Service1 -     Fetching data from MeterID 3 at IP 10.90.22.22...
+2025-05-22 12:00:37 [15] INFO EtherMeterService.Service1 -         ? Reading for MeterID 3: Low=07568748, High=0, Faults L:0 H:0
+2025-05-22 12:00:37 [15] INFO EtherMeterService.Service1 -     Fetching data from MeterID 4 at IP 10.90.22.23...
+2025-05-22 12:00:37 [15] INFO EtherMeterService.Service1 -         ? Reading for MeterID 4: Low=00593109, High=0, Faults L:0 H:0
+2025-05-22 12:00:37 [15] INFO EtherMeterService.Service1 -     Fetching data from MeterID 5 at IP 10.90.22.196...
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: ''
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'FlowMeters'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Refresh'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 1 Total'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '14342222'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 1 Flow'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '+30.979'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 1 Rollovers'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '0'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 1 Fault'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'NO'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 2 Total'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '00341950'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 2 Flow'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '+0.000'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 2 Rollovers'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '0'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 2 Fault'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'NO'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Analog Input 1 (%)'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '+0.00'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Analog Input 2 (%)'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '+0.00'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Power Supply (V)'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '+24.4'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Aux Digital I/O 1 (Input)'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'OFF'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Aux Digital I/O 2 (Input)'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'OFF'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Aux Digital I/O 3 (Dup)'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'OFF'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Device Uptime (min)'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '6922'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Web Hits'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '127'
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -         ? Reading for MeterID 5: Low=14342222, High=00341950, Faults L:0 H:0
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - === Meter Readings Collection Complete ===
+
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - === Starting Reading Insert and Threshold Analysis ===
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 1: Low=1543802, High=0, FlowRate=0
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 2: Low=1115662, High=0, FlowRate=0
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 3: Low=7568748, High=0, FlowRate=1
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 4: Low=593109, High=0, FlowRate=0
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 5: Low=14342222, High=341950, FlowRate=210
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - === Starting Threshold Evaluation ===
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 1
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 1:
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   Christmas Week: 1.25
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   MLK Week: 1.25
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   Presidents Week: 1.25
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   February: 1.22
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   March: 0.82
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   April: 0.45
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   May: 0.4
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   June: 0.4
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   July: 0.4
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   August: 0.4
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   September: 0.4
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   October: 0.4
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   November: 0.45
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   December: 0.75
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -     MeterID 1 - Threshold Report:
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -         Usage: 0, Threshold: 160 (May), %: 0.0%
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 2
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 2:
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   Christmas Week: 1.25
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   MLK Week: 1.25
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   Presidents Week: 1.25
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   February: 1.13
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   March: 0.73
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   April: 0.45
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   May: 0.4
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   June: 0.4
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   July: 0.4
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   August: 0.4
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   September: 0.4
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   October: 0.4
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   November: 0.45
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   December: 0.7
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -     MeterID 2 - Threshold Report:
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -         Usage: 0, Threshold: 180 (May), %: 0.0%
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 3
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 3:
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   Christmas Week: 1.25
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   MLK Week: 1.25
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   Presidents Week: 1.25
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   February: 1.21
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   March: 0.92
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   April: 0.5
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   May: 0.45
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   June: 0.45
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   July: 0.45
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   August: 0.45
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   September: 0.45
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   October: 0.45
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   November: 0.55
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   December: 0.79
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -     MeterID 3 - Threshold Report:
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -         Usage: 1, Threshold: 539 (May), %: 0.2%
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 4
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 4:
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   Christmas Week: 1.4
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   MLK Week: 1.4
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   Presidents Week: 1.4
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   February: 1.35
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   March: 0.93
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   April: 0.55
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   May: 0.5
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   June: 0.5
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   July: 0.6
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   August: 0.55
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   September: 0.45
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   October: 0.45
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   November: 0.5
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   December: 0.93
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -     MeterID 4 - Threshold Report:
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -         Usage: 0, Threshold: 75 (May), %: 0.0%
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 5
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 5:
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   Christmas Week: 1.25
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   MLK Week: 1.25
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   Presidents Week: 1.25
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   February: 1.2
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   March: 0.88
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   April: 0.75
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   May: 0.75
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   June: 0.8
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   July: 0.8
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   August: 0.8
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   September: 0.8
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   October: 0.85
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   November: 0.8
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -   December: 0.95
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -     MeterID 5 - Threshold Report:
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 -         Usage: 210, Threshold: 4500 (May), %: 4.7%
+2025-05-22 12:00:38 [15] INFO EtherMeterService.Service1 - === Reading Insert and Threshold Analysis Complete ===
+
+2025-05-22 13:00:39 [33] INFO EtherMeterService.Service1 - It's time to get readings from the meters.
+2025-05-22 13:00:39 [33] INFO EtherMeterService.Service1 - === Starting Meter Profile Retrieval ===
+2025-05-22 13:00:39 [33] INFO EtherMeterService.Service1 -     Retrieved MeterID 1 | IP 10.90.22.21
+2025-05-22 13:00:39 [33] INFO EtherMeterService.Service1 -     Retrieved MeterID 2 | IP 10.90.22.24
+2025-05-22 13:00:39 [33] INFO EtherMeterService.Service1 -     Retrieved MeterID 3 | IP 10.90.22.22
+2025-05-22 13:00:39 [33] INFO EtherMeterService.Service1 -     Retrieved MeterID 4 | IP 10.90.22.23
+2025-05-22 13:00:39 [33] INFO EtherMeterService.Service1 -     Retrieved MeterID 5 | IP 10.90.22.196
+2025-05-22 13:00:39 [33] INFO EtherMeterService.Service1 - === Meter Profile Retrieval Complete ===
+
+2025-05-22 13:00:39 [33] INFO EtherMeterService.Service1 - === Starting Meter Readings Collection ===
+2025-05-22 13:00:39 [33] INFO EtherMeterService.Service1 -     Fetching data from MeterID 1 at IP 10.90.22.21...
+2025-05-22 13:00:39 [33] INFO EtherMeterService.Service1 -         ? Reading for MeterID 1: Low=01543807, High=0, Faults L:0 H:0
+2025-05-22 13:00:39 [33] INFO EtherMeterService.Service1 -     Fetching data from MeterID 2 at IP 10.90.22.24...
+2025-05-22 13:00:39 [33] INFO EtherMeterService.Service1 -         ? Reading for MeterID 2: Low=01115662, High=0, Faults L:0 H:0
+2025-05-22 13:00:39 [33] INFO EtherMeterService.Service1 -     Fetching data from MeterID 3 at IP 10.90.22.22...
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 -         ? Reading for MeterID 3: Low=07568778, High=0, Faults L:0 H:0
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 -     Fetching data from MeterID 4 at IP 10.90.22.23...
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 -         ? Reading for MeterID 4: Low=00593109, High=0, Faults L:0 H:0
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 -     Fetching data from MeterID 5 at IP 10.90.22.196...
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: ''
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'FlowMeters'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Refresh'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 1 Total'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '14343766'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 1 Flow'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '+0.000'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 1 Rollovers'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '0'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 1 Fault'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'NO'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 2 Total'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '00341950'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 2 Flow'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '+0.000'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 2 Rollovers'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '0'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 2 Fault'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'NO'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Analog Input 1 (%)'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '+0.00'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Analog Input 2 (%)'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '+0.00'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Power Supply (V)'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '+24.4'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Aux Digital I/O 1 (Input)'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'OFF'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Aux Digital I/O 2 (Input)'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'OFF'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Aux Digital I/O 3 (Dup)'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'OFF'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Device Uptime (min)'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '6981'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Web Hits'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '129'
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 -         ? Reading for MeterID 5: Low=14343766, High=00341950, Faults L:0 H:0
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - === Meter Readings Collection Complete ===
+
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - === Starting Reading Insert and Threshold Analysis ===
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 1: Low=1543807, High=0, FlowRate=5
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 2: Low=1115662, High=0, FlowRate=0
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 3: Low=7568778, High=0, FlowRate=30
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 4: Low=593109, High=0, FlowRate=0
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 5: Low=14343766, High=341950, FlowRate=1544
+2025-05-22 13:00:40 [33] INFO EtherMeterService.Service1 - === Starting Threshold Evaluation ===
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 1
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 1:
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   Christmas Week: 1.25
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   MLK Week: 1.25
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   Presidents Week: 1.25
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   February: 1.22
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   March: 0.82
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   April: 0.45
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   May: 0.4
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   June: 0.4
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   July: 0.4
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   August: 0.4
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   September: 0.4
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   October: 0.4
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   November: 0.45
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   December: 0.75
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -     MeterID 1 - Threshold Report:
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -         Usage: 5, Threshold: 148 (May), %: 3.4%
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 2
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 2:
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   Christmas Week: 1.25
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   MLK Week: 1.25
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   Presidents Week: 1.25
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   February: 1.13
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   March: 0.73
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   April: 0.45
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   May: 0.4
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   June: 0.4
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   July: 0.4
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   August: 0.4
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   September: 0.4
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   October: 0.4
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   November: 0.45
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   December: 0.7
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -     MeterID 2 - Threshold Report:
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -         Usage: 0, Threshold: 180 (May), %: 0.0%
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 3
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 3:
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   Christmas Week: 1.25
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   MLK Week: 1.25
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   Presidents Week: 1.25
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   February: 1.21
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   March: 0.92
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   April: 0.5
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   May: 0.45
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   June: 0.45
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   July: 0.45
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   August: 0.45
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   September: 0.45
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   October: 0.45
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   November: 0.55
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   December: 0.79
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -     MeterID 3 - Threshold Report:
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -         Usage: 30, Threshold: 629 (May), %: 4.8%
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 4
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 4:
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   Christmas Week: 1.4
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   MLK Week: 1.4
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   Presidents Week: 1.4
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   February: 1.35
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   March: 0.93
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   April: 0.55
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   May: 0.5
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   June: 0.5
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   July: 0.6
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   August: 0.55
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   September: 0.45
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   October: 0.45
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   November: 0.5
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   December: 0.93
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -     MeterID 4 - Threshold Report:
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -         Usage: 0, Threshold: 100 (May), %: 0.0%
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 5
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 5:
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   Christmas Week: 1.25
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   MLK Week: 1.25
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   Presidents Week: 1.25
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   February: 1.2
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   March: 0.88
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   April: 0.75
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   May: 0.75
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   June: 0.8
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   July: 0.8
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   August: 0.8
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   September: 0.8
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   October: 0.85
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   November: 0.8
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -   December: 0.95
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -     MeterID 5 - Threshold Report:
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 -         Usage: 1544, Threshold: 4500 (May), %: 34.3%
+2025-05-22 13:00:41 [33] INFO EtherMeterService.Service1 - === Reading Insert and Threshold Analysis Complete ===
+
+2025-05-22 13:17:15 [12] INFO EtherMeterService.Service1 - *********************************************************
+2025-05-22 13:17:15 [12] INFO EtherMeterService.Service1 - The Sugarbush EtherMeter Reader Service has stopped.
+2025-05-22 13:26:13 [6] INFO EtherMeterService.Service1 - *********************************************************
+2025-05-22 13:26:13 [6] INFO EtherMeterService.Service1 - The Sugarbush EtherMeter Reader Service has started.
+2025-05-22 13:27:13 [7] INFO EtherMeterService.Service1 - The service has just started. Grab a set of readings from the meters.
+2025-05-22 13:27:13 [7] INFO EtherMeterService.Service1 - === Starting Meter Profile Retrieval ===
+2025-05-22 13:27:13 [7] INFO EtherMeterService.Service1 -     Retrieved MeterID 1 | IP 10.90.22.21
+2025-05-22 13:27:13 [7] INFO EtherMeterService.Service1 -     Retrieved MeterID 2 | IP 10.90.22.24
+2025-05-22 13:27:13 [7] INFO EtherMeterService.Service1 -     Retrieved MeterID 3 | IP 10.90.22.22
+2025-05-22 13:27:13 [7] INFO EtherMeterService.Service1 -     Retrieved MeterID 4 | IP 10.90.22.23
+2025-05-22 13:27:13 [7] INFO EtherMeterService.Service1 -     Retrieved MeterID 5 | IP 10.90.22.196
+2025-05-22 13:27:13 [7] INFO EtherMeterService.Service1 - === Meter Profile Retrieval Complete ===
+
+2025-05-22 13:27:13 [7] INFO EtherMeterService.Service1 - === Starting Meter Readings Collection ===
+2025-05-22 13:27:13 [7] INFO EtherMeterService.Service1 -     Fetching data from MeterID 1 at IP 10.90.22.21...
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 -         ? Reading for MeterID 1: Low=01543810, High=0, Faults L:0 H:0
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 -     Fetching data from MeterID 2 at IP 10.90.22.24...
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 -         ? Reading for MeterID 2: Low=01115662, High=0, Faults L:0 H:0
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 -     Fetching data from MeterID 3 at IP 10.90.22.22...
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 -         ? Reading for MeterID 3: Low=07568833, High=0, Faults L:0 H:0
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 -     Fetching data from MeterID 4 at IP 10.90.22.23...
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 -         ? Reading for MeterID 4: Low=00593109, High=0, Faults L:0 H:0
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 -     Fetching data from MeterID 5 at IP 10.90.22.196...
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: ''
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'FlowMeters'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Refresh'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 1 Total'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '14344266'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 1 Flow'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '+30.954'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 1 Rollovers'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '0'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 1 Fault'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'NO'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 2 Total'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '00341950'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 2 Flow'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '+0.000'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 2 Rollovers'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '0'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Meter 2 Fault'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'NO'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Analog Input 1 (%)'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '+0.00'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Analog Input 2 (%)'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '+0.00'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Power Supply (V)'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '+24.4'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Aux Digital I/O 1 (Input)'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'OFF'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Aux Digital I/O 2 (Input)'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'OFF'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Aux Digital I/O 3 (Dup)'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'OFF'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Device Uptime (min)'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '7008'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: 'Web Hits'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - [DEBUG] Meter 5 cell text: '131'
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 -         ? Reading for MeterID 5: Low=14344266, High=00341950, Faults L:0 H:0
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - === Meter Readings Collection Complete ===
+
+2025-05-22 13:27:14 [7] INFO EtherMeterService.Service1 - === Starting Reading Insert and Threshold Analysis ===
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 1: Low=1543810, High=0, FlowRate=8
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 2: Low=1115662, High=0, FlowRate=0
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 3: Low=7568833, High=0, FlowRate=85
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 4: Low=593109, High=0, FlowRate=0
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -     ? Inserted reading for MeterID 5: Low=14344266, High=341950, FlowRate=2044
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 - === Starting Threshold Evaluation ===
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 1
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 1:
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   Christmas Week: 1.25
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   MLK Week: 1.25
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   Presidents Week: 1.25
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   February: 1.22
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   March: 0.82
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   April: 0.45
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   May: 0.4
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   June: 0.4
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   July: 0.4
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   August: 0.4
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   September: 0.4
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   October: 0.4
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   November: 0.45
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   December: 0.75
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -     MeterID 1 - Threshold Report:
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -         Usage: 8, Threshold: 148 (May), %: 5.4%
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 2
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 2:
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   Christmas Week: 1.25
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   MLK Week: 1.25
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   Presidents Week: 1.25
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   February: 1.13
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   March: 0.73
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   April: 0.45
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   May: 0.4
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   June: 0.4
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   July: 0.4
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   August: 0.4
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   September: 0.4
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   October: 0.4
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   November: 0.45
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   December: 0.7
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -     MeterID 2 - Threshold Report:
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -         Usage: 0, Threshold: 180 (May), %: 0.0%
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 3
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 3:
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   Christmas Week: 1.25
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   MLK Week: 1.25
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   Presidents Week: 1.25
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   February: 1.21
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   March: 0.92
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   April: 0.5
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   May: 0.45
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   June: 0.45
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   July: 0.45
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   August: 0.45
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   September: 0.45
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   October: 0.45
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   November: 0.55
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   December: 0.79
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -     MeterID 3 - Threshold Report:
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -         Usage: 85, Threshold: 629 (May), %: 13.5%
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 4
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 4:
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   Christmas Week: 1.4
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   MLK Week: 1.4
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   Presidents Week: 1.4
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   February: 1.35
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   March: 0.93
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   April: 0.55
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   May: 0.5
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   June: 0.5
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   July: 0.6
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   August: 0.55
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   September: 0.45
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   October: 0.45
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   November: 0.5
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   December: 0.93
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -     MeterID 4 - Threshold Report:
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -         Usage: 0, Threshold: 100 (May), %: 0.0%
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 - Querying EthermeterThresholdOffset database for MeterID: 5
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 - Retrieved adjustment values for MeterID 5:
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   Christmas Week: 1.25
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   MLK Week: 1.25
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   Presidents Week: 1.25
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   January: 1
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   February: 1.2
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   March: 0.88
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   April: 0.75
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   May: 0.75
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   June: 0.8
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   July: 0.8
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   August: 0.8
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   September: 0.8
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   October: 0.85
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   November: 0.8
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -   December: 0.95
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -     MeterID 5 - Threshold Report:
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 -         Usage: 2044, Threshold: 4500 (May), %: 45.4%
+2025-05-22 13:27:15 [7] INFO EtherMeterService.Service1 - === Reading Insert and Threshold Analysis Complete ===
+
+2025-05-22 13:35:00 [19] INFO EtherMeterService.Service1 - *********************************************************
+2025-05-22 13:35:00 [19] INFO EtherMeterService.Service1 - The Sugarbush EtherMeter Reader Service has stopped.
