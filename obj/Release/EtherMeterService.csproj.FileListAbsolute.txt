@@ -14,3 +14,19 @@ C:\Users\madeslauriers\OneDrive - Alterra Mountain Company\Documents\mdstuff\Alt
 C:\Users\madeslauriers\OneDrive - Alterra Mountain Company\Documents\mdstuff\Alterra\EtherMeterService\Service\EtherMeterService\obj\Release\EtherMeterService.csproj.CopyComplete
 C:\Users\madeslauriers\OneDrive - Alterra Mountain Company\Documents\mdstuff\Alterra\EtherMeterService\Service\EtherMeterService\obj\Release\EtherMeterService.exe
 C:\Users\madeslauriers\OneDrive - Alterra Mountain Company\Documents\mdstuff\Alterra\EtherMeterService\Service\EtherMeterService\obj\Release\EtherMeterService.pdb
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Release\EtherMeterService.exe.config
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Release\EtherMeterService.exe
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Release\EtherMeterService.pdb
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Release\HtmlAgilityPack.dll
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Release\log4net.dll
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Release\HtmlAgilityPack.pdb
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Release\HtmlAgilityPack.xml
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Release\log4net.pdb
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Release\log4net.xml
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\obj\Release\EtherMeterService.csproj.AssemblyReference.cache
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\obj\Release\EtherMeterService.ProjectInstaller.resources
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\obj\Release\EtherMeterService.csproj.GenerateResource.cache
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\obj\Release\EtherMeterService.csproj.CoreCompileInputs.cache
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\obj\Release\EtherMet.FF76328B.Up2Date
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\obj\Release\EtherMeterService.exe
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\obj\Release\EtherMeterService.pdb
