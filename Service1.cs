@@ -28,13 +28,26 @@ namespace EtherMeterService
 
         Timer ActionTimer = new Timer();
 
+        private Timer PingTestTimer = new Timer();
+
+        private Timer LivePollTimer = new Timer();
+
         public Service1()
         {
             InitializeComponent();
             ActionTimer.Interval = 60000;
             ActionTimer.Enabled = false;
             ActionTimer.Elapsed += ActionTimer_Tick;
+
+            LivePollTimer.Interval = 1000; // 1 second
+            LivePollTimer.Enabled = false;
+            LivePollTimer.Elapsed += LivePollTimer_Tick;
+
+            PingTestTimer.Interval = 15 * 60 * 1000; // 15 minutes in milliseconds
+            PingTestTimer.Enabled = false;
+            PingTestTimer.Elapsed += PingTestTimer_Tick;
         }
+
 
         void ActionTimer_Tick(object sender, EventArgs e)
         {
@@ -45,6 +58,119 @@ namespace EtherMeterService
             }
             ActionTimer.Start();
         }
+
+        private void PingTestTimer_Tick(object sender, EventArgs e)
+        {
+            foreach (var kvp in Globals.dicMeterIPs)
+            {
+                string meterID = kvp.Key;
+                string ipAddress = kvp.Value;
+
+                if (!PingHost(ipAddress))
+                {
+                    Log.Warn($"Ping test failed for MeterID {meterID} at IP {ipAddress}.");
+                    if (int.TryParse(meterID, out int intMeterID))
+                    {
+                        string msg = $"Ping test failed for meter {meterID} ({ipAddress}) at {DateTime.Now}.";
+                        SendOfflineAlertEmail(intMeterID, msg);
+                    }
+                }
+                else
+                {
+                    Log.Info($"Ping test succeeded for MeterID {meterID} at IP {ipAddress}.");
+                }
+            }
+        }
+
+        private bool PingHost(string ipAddress, int timeoutMs = 2000)
+        {
+            try
+            {
+                using (var ping = new System.Net.NetworkInformation.Ping())
+                {
+                    var reply = ping.Send(ipAddress, timeoutMs);
+                    return reply.Status == System.Net.NetworkInformation.IPStatus.Success;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void LivePollTimer_Tick(object sender, EventArgs e)
+        {
+            foreach (var kvp in Globals.dicMeterNetFaults)
+            {
+                string meterID = kvp.Key;
+                string netFault = kvp.Value;
+
+                // Network fault detected
+                if (netFault == "1")
+                {
+                    int intMeterID;
+                    if (int.TryParse(meterID, out intMeterID))
+                    {
+                        string msg = $"Network fault detected for meter {meterID} at {DateTime.Now}.";
+                        SendOfflineAlertEmail(intMeterID, msg);
+                    }
+                }
+                else if (Globals.dicMeterReadings.TryGetValue(meterID, out var readingData))
+                {
+                    var readingParts = readingData.Split(';');
+                    // Meter fault is the second part
+                    if (readingParts.Length > 1 && readingParts[1] == "1")
+                    {
+                        int intMeterID;
+                        if (int.TryParse(meterID, out intMeterID))
+                        {
+                            string msg = $"Meter fault detected for meter {meterID} at {DateTime.Now}.";
+                            SendOfflineAlertEmail(intMeterID, msg);
+                        }
+                    }
+                }
+            }
+        }
+
+        private double GetLiveFlowFromMeter(string ipAddress)
+        {
+            try
+            {
+                using (WebClient client = new WebClient())
+                {
+                    string url = $"http://{ipAddress}";
+                    string pageContent = client.DownloadString(url);
+
+                    HtmlDocument doc = new HtmlDocument();
+                    doc.LoadHtml(pageContent);
+
+                    foreach (HtmlNode table in doc.DocumentNode.SelectNodes("//table") ?? Enumerable.Empty<HtmlNode>())
+                    {
+                        foreach (HtmlNode row in table.SelectNodes("tr") ?? Enumerable.Empty<HtmlNode>())
+                        {
+                            var cells = row.SelectNodes("td")?.ToList();
+                            if (cells == null || cells.Count < 2)
+                                continue;
+
+                            string label = cells[0].InnerText.Trim();
+                            if (label.Equals("Meter 1 Flow", StringComparison.OrdinalIgnoreCase))
+                            {
+                                string valueText = cells[1].InnerText.Trim().Replace("+", "").Replace(",", "");
+                                if (double.TryParse(valueText, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out double flow))
+                                    return flow;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Error fetching live flow from {ipAddress}: {ex}");
+            }
+            return 0.0;
+        }
+
+
 
         bool CheckTime()
         {
@@ -85,6 +211,90 @@ namespace EtherMeterService
             // Default to the current month
             return currentMonth;
         }
+
+        private void AnalyzeLiveFlow(string meterID, Queue<(DateTime Timestamp, double Flow)> window)
+        {
+            double threshold = 5.0; // Example threshold, adjust as needed
+            double significantDropFactor = 0.7; // 30% drop considered significant
+            double doubleFactor = 2.0;
+            double minDurationMinutes = 60.0; 
+
+            if (window.Count == 0)
+                return;
+
+            var latest = window.Last();
+            double currentFlow = latest.Flow;
+
+            // Get tracking state for this meter
+            if (!Globals.LiveFlowTracking.TryGetValue(meterID, out var tracking))
+                tracking = (DateTime.MinValue, 0);
+
+            if (currentFlow > threshold)
+            {
+                if (tracking.StartTime == DateTime.MinValue)
+                {
+                    // Start new tracking
+                    Globals.LiveFlowTracking[meterID] = (latest.Timestamp, currentFlow);
+                }
+                else
+                {
+                    // Check for double or significant drop
+                    if (currentFlow >= tracking.InitialFlow * doubleFactor)
+                    {
+                        // Flow doubled, reset tracking
+                        Globals.LiveFlowTracking[meterID] = (latest.Timestamp, currentFlow);
+                        Log.Info($"[LIVE] Flow doubled for Meter {meterID}, resetting sustained count.");
+                    }
+                    else if (currentFlow < tracking.InitialFlow * significantDropFactor)
+                    {
+                        // Flow dropped significantly, reset tracking
+                        Globals.LiveFlowTracking.Remove(meterID);
+                        Log.Info($"[LIVE] Flow dropped significantly for Meter {meterID}, resetting sustained count.");
+                    }
+                    else
+                    {
+                        // Still above threshold and within range, check duration
+                        var duration = (latest.Timestamp - tracking.StartTime).TotalMinutes;
+                        if (duration >= minDurationMinutes)
+                        {
+                            Log.Warn($"[LIVE] Sustained excess usage detected for Meter {meterID}: {currentFlow:F2} gal/min for {duration:F1} min");
+
+                            // Send custom alert email
+                            int intMeterID;
+                            if (int.TryParse(meterID, out intMeterID))
+                            {
+                                string meterName = Globals.MeterNames.ContainsKey(intMeterID) ? Globals.MeterNames[intMeterID] : "Unknown Meter";
+                                string emailMessage =
+                                    $"[LIVE ALERT]\n" +
+                                    $"Sustained excess usage detected for {meterName} (MeterID: {meterID}).\n" +
+                                    $"Current Flow: {currentFlow:F2} gal/min\n" +
+                                    $"Threshold: {threshold:F2} gal/min\n" +
+                                    $"Duration: {duration:F1} minutes\n" +
+                                    $"Start Time: {tracking.StartTime}\n" +
+                                    $"Current Time: {latest.Timestamp}\n";
+
+                                SendAlertEmail(intMeterID, emailMessage, new[] { "CGaidys@sugarbush.com", "dmccullough@sugarbush.com" });
+
+                            }
+
+                            // Optionally reset tracking to avoid repeated emails
+                            Globals.LiveFlowTracking[meterID] = (latest.Timestamp, currentFlow);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                // Flow dropped below threshold, reset tracking
+                if (tracking.StartTime != DateTime.MinValue)
+                {
+                    Globals.LiveFlowTracking.Remove(meterID);
+                    Log.Info($"[LIVE] Flow dropped below threshold for Meter {meterID}, resetting sustained count.");
+                }
+            }
+        }
+
+
 
         Dictionary<string, float> GetThresholdAdjustments(int meterID)
         {
@@ -142,25 +352,20 @@ namespace EtherMeterService
             return adjustments;
         }
 
-        bool SendAlertEmail(int meterID, string emailMessage)
+        bool SendAlertEmail(int meterID, string emailMessage, IEnumerable<string> recipients = null)
         {
             try
             {
-                // Get the meter name from the dictionary
                 string meterName = Globals.MeterNames.ContainsKey(meterID) ? Globals.MeterNames[meterID] : "Unknown Meter";
-
-                // Include the meter name in the email body
                 emailMessage = $"Alert for {meterName} (MeterID: {meterID}):\n" + emailMessage;
 
-                // Configure the SMTP client with the provided settings
                 SmtpClient mySmtpClient = new SmtpClient("smtp-relay.idirectory.itw")
                 {
-                    Port = 25, // Use port 25
+                    Port = 25,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
-                    UseDefaultCredentials = true // Enable anonymous authentication
+                    UseDefaultCredentials = true
                 };
 
-                // Create the email message
                 MailMessage mail = new MailMessage
                 {
                     From = new MailAddress("EthermeterAlerts@sugarbush.com"),
@@ -169,12 +374,21 @@ namespace EtherMeterService
                     IsBodyHtml = false
                 };
 
-                // Add recipient(s)
-                mail.To.Add("Waterusagealerts@sugarbush.com");
+                // Add recipients
+                if (recipients != null && recipients.Any())
+                {
+                    foreach (var recipient in recipients)
+                    {
+                        if (!string.IsNullOrWhiteSpace(recipient))
+                            mail.To.Add(recipient);
+                    }
+                }
+                else
+                {
+                    mail.To.Add("Waterusagealerts@sugarbush.com");
+                }
 
-                // Send the email
                 mySmtpClient.Send(mail);
-
                 Log.Info("Alert email sent successfully.");
             }
             catch (Exception ex)
@@ -192,6 +406,42 @@ namespace EtherMeterService
             var calendar = culture.Calendar;
             var dateTimeFormat = culture.DateTimeFormat;
             return calendar.GetWeekOfYear(DateTime.Now, dateTimeFormat.CalendarWeekRule, dateTimeFormat.FirstDayOfWeek);
+        }
+
+        private bool SendOfflineAlertEmail(int meterID, string emailMessage)
+        {
+            try
+            {
+                string meterName = Globals.MeterNames.ContainsKey(meterID) ? Globals.MeterNames[meterID] : "Unknown Meter";
+                emailMessage = $"OFFLINE ALERT for {meterName} (MeterID: {meterID}):\n" + emailMessage;
+
+                SmtpClient mySmtpClient = new SmtpClient("smtp-relay.idirectory.itw")
+                {
+                    Port = 25,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = true
+                };
+
+                MailMessage mail = new MailMessage
+                {
+                    From = new MailAddress("EthermeterAlerts@sugarbush.com"),
+                    Subject = "Meter Offline Alert",
+                    Body = emailMessage,
+                    IsBodyHtml = false
+                };
+
+                // Use a dedicated recipient for offline alerts
+                mail.To.Add("italerts@sugarbush.com");
+
+                mySmtpClient.Send(mail);
+                Log.Info("Offline alert email sent successfully.");
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error sending offline alert email. " + ex.ToString());
+            }
+
+            return true;
         }
 
         private bool RecordNewReadings()
@@ -460,6 +710,11 @@ namespace EtherMeterService
                         Globals.dicMeterNetFaults[meterID] = "1";
                     }
                 }
+                if (Globals.dicMeterReadings.Count == 0)
+                {
+                    Log.Warn("No readings could be obtained from any meter. Sending offline alert.");
+                    SendOfflineAlertEmail(0, "No readings could be obtained from any meter at " + DateTime.Now);
+                }
             }
 
             Log.Info("=== Meter Readings Collection Complete ===\n");
@@ -521,12 +776,17 @@ namespace EtherMeterService
             Log.Info("*********************************************************");
             Log.Info("The Sugarbush EtherMeter Reader Service has started.");
             ActionTimer.Start();
+            LivePollTimer.Start();
+            PingTestTimer.Start();
         }
 
         protected override void OnStop()
         {
             Log.Info("*********************************************************");
             Log.Info("The Sugarbush EtherMeter Reader Service has stopped.");
+            ActionTimer.Stop();
+            LivePollTimer.Stop();
+            PingTestTimer.Stop();
         }
 
         public static class Globals
@@ -538,6 +798,9 @@ namespace EtherMeterService
             public static Dictionary<string, string> dicMeterNetFaults = new Dictionary<string, string> { };
             public static Dictionary<string, bool> dicInitialAlertSent = new Dictionary<string, bool>();
             public static Dictionary<string, bool> dicSecondaryAlertSent = new Dictionary<string, bool>();
+            public static Dictionary<string, Queue<(DateTime Timestamp, double Flow)>> LiveFlowWindows = new Dictionary<string, Queue<(DateTime, double)>>();
+            public static Dictionary<string, (DateTime StartTime, double InitialFlow)> LiveFlowTracking = new Dictionary<string, (DateTime, double)>();
+
 
             public static Dictionary<int, string> MeterNames = new Dictionary<int, string>()
             {
