@@ -5,19 +5,14 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
 using log4net;
 using System.Data.SqlClient;
-using System.Data.Common;
 using System.Timers;
 using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Web;
 using HtmlAgilityPack;
 using System.Net.Mail;
-using System.Net.Mime;
+
+
 
 namespace EtherMeterService
 {
@@ -65,22 +60,36 @@ namespace EtherMeterService
             {
                 string meterID = kvp.Key;
                 string ipAddress = kvp.Value;
+                int intMeterID;
+                bool isOnline = PingHost(ipAddress);
 
-                if (!PingHost(ipAddress))
+                if (int.TryParse(meterID, out intMeterID))
                 {
-                    Log.Warn($"Ping test failed for MeterID {meterID} at IP {ipAddress}.");
-                    if (int.TryParse(meterID, out int intMeterID))
+                    bool wasOnline = Globals.MeterIsOnline.TryGetValue(intMeterID, out bool prevOnline) ? prevOnline : true;
+
+                    if (!isOnline)
                     {
+                        Log.Warn($"Ping test failed for MeterID {meterID} at IP {ipAddress}.");
                         string msg = $"Ping test failed for meter {meterID} ({ipAddress}) at {DateTime.Now}.";
                         SendOfflineAlertEmail(intMeterID, msg);
+                        Globals.MeterIsOnline[intMeterID] = false;
                     }
-                }
-                else
-                {
-                    Log.Info($"Ping test succeeded for MeterID {meterID} at IP {ipAddress}.");
+                    else
+                    {
+                        Log.Info($"Ping test succeeded for MeterID {meterID} at IP {ipAddress}.");
+                        if (!wasOnline)
+                        {
+                            // Meter has come back online
+                            string meterName = Globals.MeterNames.ContainsKey(intMeterID) ? Globals.MeterNames[intMeterID] : "Unknown Meter";
+                            string msg = $"Meter {meterName} (MeterID: {meterID}, IP: {ipAddress}) is back ONLINE at {DateTime.Now}.";
+                            SendBackOnlineAlertEmail(intMeterID, msg);
+                        }
+                        Globals.MeterIsOnline[intMeterID] = true;
+                    }
                 }
             }
         }
+
 
         private bool PingHost(string ipAddress, int timeoutMs = 2000)
         {
@@ -100,37 +109,133 @@ namespace EtherMeterService
 
         private void LivePollTimer_Tick(object sender, EventArgs e)
         {
-            foreach (var kvp in Globals.dicMeterNetFaults)
+            try // NEW: keep the timer alive if anything throws
             {
-                string meterID = kvp.Key;
-                string netFault = kvp.Value;
-
-                // Network fault detected
-                if (netFault == "1")
+                foreach (var kvp in Globals.dicMeterIPs)
                 {
-                    int intMeterID;
-                    if (int.TryParse(meterID, out intMeterID))
+                    string meterID = kvp.Key;
+                    string ipAddress = kvp.Value;
+
+                    double currentFlow = GetLiveFlowFromMeter(ipAddress);
+                    DateTime now = DateTime.Now;
+
+                    if (!Globals.LiveFlowTracking.TryGetValue(meterID, out var tracking))
                     {
-                        string msg = $"Network fault detected for meter {meterID} at {DateTime.Now}.";
-                        SendOfflineAlertEmail(intMeterID, msg);
+                        tracking = (DateTime.MinValue, 0);
+                    }
+
+                    if (currentFlow > 0)
+                    {
+                        // Flow detected
+                        if (tracking.StartTime == DateTime.MinValue)
+                        {
+                            Globals.LiveFlowTracking[meterID] = (now, currentFlow);
+                            Log.Info($"[LIVE] Started tracking sustained flow for Meter {meterID} at {currentFlow:F2} gpm");
+                        }
+                        else
+                        {
+                            double duration = (now - tracking.StartTime).TotalMinutes;
+                            double dropFactor = 0.7;
+                            double doubleFactor = 2.0;
+
+                            if (currentFlow >= tracking.InitialFlow * doubleFactor)
+                            {
+                                Globals.LiveFlowTracking[meterID] = (now, currentFlow);
+                                Log.Info($"[LIVE] Flow doubled for Meter {meterID}, resetting sustained tracking.");
+                            }
+                            else if (currentFlow < tracking.InitialFlow * dropFactor)
+                            {
+                                Globals.LiveFlowTracking.Remove(meterID);
+                                if (Globals.LastSustainedFlowAlertSent.ContainsKey(meterID))
+                                    Globals.LastSustainedFlowAlertSent.Remove(meterID);
+                                Log.Info($"[LIVE] Flow dropped significantly for Meter {meterID}, resetting tracking.");
+                            }
+                            else
+                            {
+                                if (duration >= 60.0)
+                                {
+                                    bool shouldSend = !Globals.LastSustainedFlowAlertSent.TryGetValue(meterID, out DateTime lastSent) ||
+                                                      (now - lastSent).TotalMinutes >= 60;
+
+                                    if (shouldSend)
+                                    {
+                                        if (int.TryParse(meterID, out int intMeterID))
+                                        {
+                                            string meterName = Globals.MeterNames.ContainsKey(intMeterID) ? Globals.MeterNames[intMeterID] : "Unknown Meter";
+                                            string msg =
+                                                $"[LIVE ALERT]\n" +
+                                                $"Sustained flow detected for {meterName} (MeterID: {meterID})\n" +
+                                                $"Flow: {currentFlow:F2} gal/min\n" +
+                                                $"Duration: {duration:F1} minutes\n" +
+                                                $"Start: {tracking.StartTime}\n" +
+                                                $"Now: {now}";
+
+                                            SendAlertEmail(intMeterID, msg);
+                                            Globals.LastSustainedFlowAlertSent[meterID] = now;
+                                            Log.Warn($"[LIVE] Sustained flow alert sent for Meter {meterID}. Next eligible after 60 minutes.");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        // Clear zero flow marker safely
+                        if (Globals.LastZeroFlowTime.ContainsKey(meterID))
+                            Globals.LastZeroFlowTime.Remove(meterID);
+                    }
+                    else
+                    {
+                        // Flow is zero
+                        if (!Globals.LastZeroFlowTime.ContainsKey(meterID))
+                        {
+                            Globals.LastZeroFlowTime[meterID] = now;
+                        }
+                        else if ((now - Globals.LastZeroFlowTime[meterID]).TotalSeconds > 10)
+                        {
+                            Globals.LiveFlowTracking.Remove(meterID);
+                            if (Globals.LastSustainedFlowAlertSent.ContainsKey(meterID))
+                                Globals.LastSustainedFlowAlertSent.Remove(meterID);
+                            Globals.LastZeroFlowTime.Remove(meterID);
+                            Log.Info($"[LIVE] Zero flow sustained for Meter {meterID}, resetting tracking and alerts.");
+                        }
                     }
                 }
-                else if (Globals.dicMeterReadings.TryGetValue(meterID, out var readingData))
+
+                // Fault detection (unchanged)
+                foreach (var kvp in Globals.dicMeterNetFaults)
                 {
-                    var readingParts = readingData.Split(';');
-                    // Meter fault is the second part
-                    if (readingParts.Length > 1 && readingParts[1] == "1")
+                    string meterID = kvp.Key;
+                    string netFault = kvp.Value;
+
+                    if (netFault == "1")
                     {
-                        int intMeterID;
-                        if (int.TryParse(meterID, out intMeterID))
+                        if (int.TryParse(meterID, out int intMeterID))
                         {
-                            string msg = $"Meter fault detected for meter {meterID} at {DateTime.Now}.";
+                            string msg = $"Network fault detected for meter {meterID} at {DateTime.Now}.";
                             SendOfflineAlertEmail(intMeterID, msg);
+                        }
+                    }
+                    else if (Globals.dicMeterReadings.TryGetValue(meterID, out var readingData))
+                    {
+                        var readingParts = readingData.Split(';');
+                        if (readingParts.Length > 1 && readingParts[1] == "1")
+                        {
+                            if (int.TryParse(meterID, out int intMeterID))
+                            {
+                                string msg = $"Meter fault detected for meter {meterID} at {DateTime.Now}.";
+                                SendOfflineAlertEmail(intMeterID, msg);
+                            }
                         }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                Log.Error("Unexpected error during LivePollTimer_Tick.", ex);
+            }
         }
+
+
 
         private double GetLiveFlowFromMeter(string ipAddress)
         {
@@ -211,90 +316,6 @@ namespace EtherMeterService
             // Default to the current month
             return currentMonth;
         }
-
-        private void AnalyzeLiveFlow(string meterID, Queue<(DateTime Timestamp, double Flow)> window)
-        {
-            double threshold = 5.0; // Example threshold, adjust as needed
-            double significantDropFactor = 0.7; // 30% drop considered significant
-            double doubleFactor = 2.0;
-            double minDurationMinutes = 60.0; 
-
-            if (window.Count == 0)
-                return;
-
-            var latest = window.Last();
-            double currentFlow = latest.Flow;
-
-            // Get tracking state for this meter
-            if (!Globals.LiveFlowTracking.TryGetValue(meterID, out var tracking))
-                tracking = (DateTime.MinValue, 0);
-
-            if (currentFlow > threshold)
-            {
-                if (tracking.StartTime == DateTime.MinValue)
-                {
-                    // Start new tracking
-                    Globals.LiveFlowTracking[meterID] = (latest.Timestamp, currentFlow);
-                }
-                else
-                {
-                    // Check for double or significant drop
-                    if (currentFlow >= tracking.InitialFlow * doubleFactor)
-                    {
-                        // Flow doubled, reset tracking
-                        Globals.LiveFlowTracking[meterID] = (latest.Timestamp, currentFlow);
-                        Log.Info($"[LIVE] Flow doubled for Meter {meterID}, resetting sustained count.");
-                    }
-                    else if (currentFlow < tracking.InitialFlow * significantDropFactor)
-                    {
-                        // Flow dropped significantly, reset tracking
-                        Globals.LiveFlowTracking.Remove(meterID);
-                        Log.Info($"[LIVE] Flow dropped significantly for Meter {meterID}, resetting sustained count.");
-                    }
-                    else
-                    {
-                        // Still above threshold and within range, check duration
-                        var duration = (latest.Timestamp - tracking.StartTime).TotalMinutes;
-                        if (duration >= minDurationMinutes)
-                        {
-                            Log.Warn($"[LIVE] Sustained excess usage detected for Meter {meterID}: {currentFlow:F2} gal/min for {duration:F1} min");
-
-                            // Send custom alert email
-                            int intMeterID;
-                            if (int.TryParse(meterID, out intMeterID))
-                            {
-                                string meterName = Globals.MeterNames.ContainsKey(intMeterID) ? Globals.MeterNames[intMeterID] : "Unknown Meter";
-                                string emailMessage =
-                                    $"[LIVE ALERT]\n" +
-                                    $"Sustained excess usage detected for {meterName} (MeterID: {meterID}).\n" +
-                                    $"Current Flow: {currentFlow:F2} gal/min\n" +
-                                    $"Threshold: {threshold:F2} gal/min\n" +
-                                    $"Duration: {duration:F1} minutes\n" +
-                                    $"Start Time: {tracking.StartTime}\n" +
-                                    $"Current Time: {latest.Timestamp}\n";
-
-                                SendAlertEmail(intMeterID, emailMessage, new[] { "CGaidys@sugarbush.com", "dmccullough@sugarbush.com" });
-
-                            }
-
-                            // Optionally reset tracking to avoid repeated emails
-                            Globals.LiveFlowTracking[meterID] = (latest.Timestamp, currentFlow);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                // Flow dropped below threshold, reset tracking
-                if (tracking.StartTime != DateTime.MinValue)
-                {
-                    Globals.LiveFlowTracking.Remove(meterID);
-                    Log.Info($"[LIVE] Flow dropped below threshold for Meter {meterID}, resetting sustained count.");
-                }
-            }
-        }
-
-
 
         Dictionary<string, float> GetThresholdAdjustments(int meterID)
         {
@@ -399,6 +420,43 @@ namespace EtherMeterService
             return true;
         }
 
+        private bool SendBackOnlineAlertEmail(int meterID, string emailMessage)
+        {
+            try
+            {
+                string meterName = Globals.MeterNames.ContainsKey(meterID) ? Globals.MeterNames[meterID] : "Unknown Meter";
+                emailMessage = $"ONLINE ALERT for {meterName} (MeterID: {meterID}):\n" + emailMessage;
+
+                SmtpClient mySmtpClient = new SmtpClient("smtp-relay.idirectory.itw")
+                {
+                    Port = 25,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = true
+                };
+
+                MailMessage mail = new MailMessage
+                {
+                    From = new MailAddress("EthermeterAlerts@sugarbush.com"),
+                    Subject = "Meter Back Online Alert",
+                    Body = emailMessage,
+                    IsBodyHtml = false
+                };
+
+                // Use a dedicated recipient for online alerts
+                mail.To.Add("italerts@sugarbush.com");
+
+                mySmtpClient.Send(mail);
+                Log.Info("Back online alert email sent successfully.");
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error sending back online alert email. " + ex.ToString());
+            }
+
+            return true;
+        }
+
+
 
         int GetCurrentWeekOfYear()
         {
@@ -412,6 +470,16 @@ namespace EtherMeterService
         {
             try
             {
+                // Check if an alert was sent within the last hour
+                if (Globals.LastOfflineAlertSent.TryGetValue(meterID, out DateTime lastSent))
+                {
+                    if ((DateTime.Now - lastSent).TotalMinutes < 360)
+                    {
+                        Log.Info($"Offline alert for MeterID {meterID} suppressed (last sent at {lastSent}).");
+                        return false;
+                    }
+                }
+
                 string meterName = Globals.MeterNames.ContainsKey(meterID) ? Globals.MeterNames[meterID] : "Unknown Meter";
                 emailMessage = $"OFFLINE ALERT for {meterName} (MeterID: {meterID}):\n" + emailMessage;
 
@@ -435,6 +503,9 @@ namespace EtherMeterService
 
                 mySmtpClient.Send(mail);
                 Log.Info("Offline alert email sent successfully.");
+
+                // Update last sent time
+                Globals.LastOfflineAlertSent[meterID] = DateTime.Now;
             }
             catch (Exception ex)
             {
@@ -443,6 +514,7 @@ namespace EtherMeterService
 
             return true;
         }
+
 
         private bool RecordNewReadings()
         {
@@ -610,7 +682,7 @@ namespace EtherMeterService
             }
             finally
             {
-                Globals.dicMeterIPs.Clear();
+                //Globals.dicMeterIPs.Clear();
                 Globals.dicMeterNetFaults.Clear();
                 Globals.dicMeterReadings.Clear();
             }
@@ -800,6 +872,13 @@ namespace EtherMeterService
             public static Dictionary<string, bool> dicSecondaryAlertSent = new Dictionary<string, bool>();
             public static Dictionary<string, Queue<(DateTime Timestamp, double Flow)>> LiveFlowWindows = new Dictionary<string, Queue<(DateTime, double)>>();
             public static Dictionary<string, (DateTime StartTime, double InitialFlow)> LiveFlowTracking = new Dictionary<string, (DateTime, double)>();
+            public static Dictionary<int, DateTime> LastOfflineAlertSent = new Dictionary<int, DateTime>();
+            public static Dictionary<int, bool> MeterIsOnline = new Dictionary<int, bool>();
+            public static Dictionary<string, DateTime> LastZeroFlowTime = new Dictionary<string, DateTime>();
+            public static Dictionary<string, DateTime> LastSustainedFlowAlertSent = new Dictionary<string, DateTime>();
+
+
+
 
 
             public static Dictionary<int, string> MeterNames = new Dictionary<int, string>()
