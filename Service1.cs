@@ -152,10 +152,13 @@ namespace EtherMeterService
                             }
                             else
                             {
-                                if (duration >= 60.0)
+                                // Set custom duration for Meter 5 (ClayBrook)
+                                double requiredDuration = (meterID == "5") ? 120.0 : 60.0;
+
+                                if (duration >= requiredDuration)
                                 {
                                     bool shouldSend = !Globals.LastSustainedFlowAlertSent.TryGetValue(meterID, out DateTime lastSent) ||
-                                                      (now - lastSent).TotalMinutes >= 60;
+                                                      (now - lastSent).TotalMinutes >= requiredDuration;
 
                                     if (shouldSend)
                                     {
@@ -172,7 +175,7 @@ namespace EtherMeterService
 
                                             SendAlertEmail(intMeterID, msg);
                                             Globals.LastSustainedFlowAlertSent[meterID] = now;
-                                            Log.Warn($"[LIVE] Sustained flow alert sent for Meter {meterID}. Next eligible after 60 minutes.");
+                                            Log.Warn($"[LIVE] Sustained flow alert sent for Meter {meterID}. Next eligible after {requiredDuration} minutes.");
                                         }
                                     }
                                 }

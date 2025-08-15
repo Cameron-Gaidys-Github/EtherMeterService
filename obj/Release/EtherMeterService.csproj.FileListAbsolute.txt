@@ -30,3 +30,7 @@ C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Deve
 C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\obj\Release\EtherMet.FF76328B.Up2Date
 C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\obj\Release\EtherMeterService.exe
 C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\obj\Release\EtherMeterService.pdb
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Release\EtherMeterService.exe.manifest
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\bin\Release\EtherMeterService.application
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\obj\Release\EtherMeterService.exe.manifest
+C:\Users\cgaidys\Alterra Mountain Company\SUG IT Operations - Knowledgebase\Developement Codebase\EtherMeterService\Service\EtherMeterService\obj\Release\EtherMeterService.application
